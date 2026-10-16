@@ -26,7 +26,8 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 
 const prompt = (transcript: string, lang: string, now: string, timezone: string) => `You turn messy voice notes into clean, actionable notes.
 
-Current date-time: ${now} (time zone: ${timezone}).
+Current local date-time of the user: ${now} (time zone: ${timezone}).
+Resolve relative dates ("today", "tomorrow", "on Friday") against this local date and return times with the same UTC offset.
 Language of the note: ${lang}. Write every output string in the same language as the note.
 
 Return ONLY a JSON object with exactly these fields:

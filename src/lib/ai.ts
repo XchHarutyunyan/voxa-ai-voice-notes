@@ -9,6 +9,18 @@ import type { Lang, NoteDraft, NoteSource } from "./types";
 const API_URL = Platform.OS === "web" ? "/api/process-note" : process.env.EXPO_PUBLIC_API_URL;
 const TIMEOUT_MS = 15000;
 
+/** Local date-time with UTC offset, e.g. "Saturday, 2026-10-17T01:39:00+04:00" */
+export const localNow = (d: Date) => {
+  const pad = (n: number) => String(Math.abs(n)).padStart(2, "0");
+  const offset = -d.getTimezoneOffset();
+  const sign = offset >= 0 ? "+" : "-";
+  const iso =
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
+    `T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}` +
+    `${sign}${pad(Math.floor(Math.abs(offset) / 60))}:${pad(Math.abs(offset) % 60)}`;
+  return `${d.toLocaleDateString("en-US", { weekday: "long" })}, ${iso}`;
+};
+
 const clean = (draft: NoteDraft): NoteDraft => ({
   title: String(draft.title).trim(),
   summary: String(draft.summary).trim(),
@@ -37,7 +49,8 @@ export async function processTranscript(
         body: JSON.stringify({
           transcript,
           lang,
-          now: now.toISOString(),
+          // Local time, not UTC: "tomorrow" must be relative to the user's calendar day
+          now: localNow(now),
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
         signal: controller.signal,
