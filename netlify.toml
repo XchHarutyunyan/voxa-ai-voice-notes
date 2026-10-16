@@ -10,7 +10,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Permissions-Policy = "microphone=(self \"https://khharutyunyan.dev\")"
+    Permissions-Policy = "microphone=(self \"https://khharutyunyan.dev\" \"http://localhost:3000\" \"http://localhost:5055\")"
     Content-Security-Policy = "frame-ancestors 'self' https://khharutyunyan.dev http://localhost:*"
 
 [[redirects]]

@@ -5,6 +5,18 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NotesProvider } from "@/lib/notesStore";
 import { colors } from "@/lib/theme";
 
+// Web: hide scrollbars (the app is often embedded in a phone frame) and match the page background
+if (Platform.OS === "web" && typeof document !== "undefined" && !document.getElementById("voxa-web-style")) {
+  const style = document.createElement("style");
+  style.id = "voxa-web-style";
+  style.textContent = `
+    html, body { background: ${colors.bg}; }
+    * { scrollbar-width: none; }
+    *::-webkit-scrollbar { display: none; }
+  `;
+  document.head.appendChild(style);
+}
+
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
