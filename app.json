@@ -1,25 +1,46 @@
 {
   "expo": {
-    "name": "ai-voice-notes",
-    "slug": "ai-voice-notes",
+    "name": "Voxa \u2014 AI Voice Notes",
+    "slug": "voxa-ai-voice-notes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.khharutyunyan.voxa"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0F141A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "dev.khharutyunyan.voxa"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "single",
+      "bundler": "metro",
+      "name": "Voxa \u2014 AI Voice Notes",
+      "themeColor": "#0F141A",
+      "backgroundColor": "#0F141A"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow Voxa to use the microphone to record voice notes.",
+          "speechRecognitionPermission": "Allow Voxa to turn your voice into text."
+        }
+      ]
+    ],
+    "scheme": "voxa",
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }

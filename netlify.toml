@@ -1,0 +1,19 @@
+[build]
+  command = "npx expo export -p web"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Allow the portfolio site to embed the demo in an <iframe> with microphone access
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "microphone=(self \"https://khharutyunyan.dev\")"
+    Content-Security-Policy = "frame-ancestors 'self' https://khharutyunyan.dev http://localhost:*"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
